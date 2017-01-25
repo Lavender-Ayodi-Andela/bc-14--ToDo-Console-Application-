@@ -14,8 +14,9 @@ create_table()
 
 #def hjt():
 	#b_list = c.fetchall()
+class ToDoList():
 
-def data_entry():
+def data_entry(self):
     #user = input('Enter your first name: ')
     todo = input('Enter the activity you want to do:')
     item = input('Enter the item you want to do:')
@@ -35,9 +36,9 @@ def data_entry():
 	    if que == 'n':
 		    break
 
-data_entry()
 
-def view_todo ():
+
+def view_todo (self):
 	con.row_factory = lambda cursor, row: row [0]
 	rows = c.execute('SELECT todo FROM toDo_4').fetchall()
 	#return (rows)
@@ -52,7 +53,7 @@ def view_todo ():
 				print (a)
 
 
-def solve():
+def solve(self):
 	c = con.cursor()
 	con.row_factory = lambda cursor, row: row [0]
 	c.execute('SELECT todo,count (todo) from toDo_4 group by todo having count (todo) >1')
@@ -60,17 +61,24 @@ def solve():
 
 	print (k)
 
-solve()
+
+def unique(self):
+	key_word = input('Enter keyword: ')
+	c = con.cursor()
+	word = c.execute('SELECT item FROM toDo_4 WHERE item = ?', (key_word)).fetchall()
+	
+
+	print (word)
 
 
-def view_items():
+def view_items(self):
 	c.execute('SELECT * FROM toDo_4')
 	rows = c.fetchall()
 
 	for row in rows:
 		print (row [1])
 
-view_items()
+
 
 
 
