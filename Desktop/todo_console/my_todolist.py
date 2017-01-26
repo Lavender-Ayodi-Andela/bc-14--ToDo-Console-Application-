@@ -15,15 +15,19 @@ create_table()
 
 		
 def data_entry():
-	todo = input('Enter the activity you want to do:')
-	item = input('Enter the item you want to do:')
+	print('For example : Books To Read')
+	todo = input('Enter the TITLE of the TO-DO List:')
+	print('Insert in this format : Books To Read: Bible')
+	item = input('Enter the Item you want to include in the List:')
 	c.execute ('INSERT INTO toDo_4 (todo, item) VALUES (?, ?)', (todo, item))
 	con.commit()
 	print ('Data entered successfully')
 	que = input ('Do you want add another item? y/n ')
 	print ('Data entered successfully')
 	while que == 'y':
+		print('For example : Books To Read')
 		todo = input('Enter the activity you want to do:')
+		print('Insert in this format : Books To Read: Bible')
 		item = input('Enter the item you want to do:')
 		c.execute ('INSERT INTO toDo_4 (todo, item) VALUES (?, ?)', (todo, item))
 		con.commit()
@@ -44,17 +48,20 @@ def solve ():
 				print (a)
 
 def view_todo():
-	c = con.cursor()
-	con.row_factory = lambda cursor, row: row [0]
+	#c = con.cursor()
+	#con.row_factory = lambda cursor, row: row [0]
 	c.execute('SELECT todo,count (todo) from toDo_4 group by todo having count (todo) >1')
 	k = c.fetchall()
-	print (k)
+	for l in k:
+		print (l [0])
 
 def unique():
 	key_word = input('Enter keyword: ')
-	c = con.cursor()
-	word = c.execute('SELECT item FROM toDo_4 WHERE item = ?', (key_word)).fetchall()
-	print (word [1])
+	#c = con.cursor()
+	c.execute('SELECT item FROM toDo_4 WHERE item LIKE "key_word%" ')
+	word = c.fetchall()
+	for s in word:
+		print (s [1])
 
 def view_items():
 	c.execute('SELECT * FROM toDo_4')
@@ -64,16 +71,42 @@ def view_items():
 def console():
 	while True:
 		print()
-		print("Forget Me Not")
+		print('***************************************************************')
+		print("                        Forget Me Not                          ")
+		print('***************************************************************')
 		print()
-		print("Your Favourite To-Do List")
-		print("1. Add To Do Categories and Items")
-		print("2. View Your To Do Collections")
-		print("3. View All The Items You Want To Do")
-		print("4. View The Items to be Done From each To Do Category")
-		print("0. Quit")
-		x = input("Welcome! Please choose an option: ")
+		print('_______________________________________________________________')
+		print()
+		print("                   Your Favourite To-Do List                   ")
+		print('_______________________________________________________________')
+		print('_______________________________________________________________')
+		print()
+		print()
+		print("                           Enter 1                             ")
+		print("                        --------------                          ")
+		print("                To Add To Do Categories and Items                  ")
+		print()
+		print("                           Enter 2                            ")
+		print("                        --------------                          ")
+		print("                   View Your To Do Collections                    ")
+		print()
+		print("                           Enter 3                            ")
+		print("                        --------------                          ")
+		print("                View All The Items You Want To Do                ")
+		print()
+		print("                           Enter 4                            ")
+		print("                        --------------                          ")
+		print("       View The Items to be Done From each To Do Category      ")
+		print()
+		print("                           Enter 0                            ")
+		print("                        --------------                          ")
+		print("                            Quit                                ")
+		print('_______________________________________________________________')
+		print()
+		x = input("               Welcome! Please choose an option:    ")
 		x = int(x)
+		print('_______________________________________________________________')
+		print()
 		if x == 0:
 			#exit
 			break
@@ -82,9 +115,15 @@ def console():
 			data_entry()
 			pass
 		elif x == 2:
+			print('The TO-DO Lists available include:')
+			print('----------------------------------')
+			print()
 			view_todo()
 			pass
 		elif x == 3:
+			print('The Items in the TO-DO Lists available include:')
+			print('-----------------------------------------------')
+			print()
 			view_items()
 			pass
 		elif x == 4:
