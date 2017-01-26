@@ -1,6 +1,7 @@
 import sys
 import sqlite3
-import terminaltables
+from texttable import Texttable
+t = Texttable()
 
 con = sqlite3.connect('database_2.db')
 c = con.cursor()
@@ -58,7 +59,8 @@ def view_todo():
 	c.execute('SELECT todo,count (todo) from toDo_4 group by todo having count (todo) >1')
 	k = c.fetchall()
 	for l in k:
-		print (l [0])
+		t.add_rows ([[l [0]]])
+		print (t.draw())
 
 def unique():
 	print('Here enter the TITLE of TO-DO List in order to retrieve items recorded under it.')
@@ -71,13 +73,15 @@ def unique():
 	c.execute('SELECT * FROM toDo_4 WHERE item LIKE ?' , ('%'+key_word+'%',))
 	word = c.fetchall()
 	for s in word:
-		print (s [1])
+		t.add_rows ([[s [1]]])
+		print (t.draw())
 
 def view_items():
 	c.execute('SELECT * FROM toDo_4')
 	rows = c.fetchall()
 	for row in rows:
-		print (row [1])
+		t.add_rows([[[row [1]]]])
+		print (t.draw())
 def console():
 	while True:
 		print()
