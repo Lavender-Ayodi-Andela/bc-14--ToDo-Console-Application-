@@ -1,4 +1,5 @@
-docopt==0.6.2
-tabulate==0.7.7
-terminaltables==3.1.0
+colorama==0.3.7
+pyfiglet==0.7.5
+Pyrebase==3.0.27
+termcolor==1.1.0
 texttable==0.8.7

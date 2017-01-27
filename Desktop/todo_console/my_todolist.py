@@ -3,6 +3,8 @@
 # Date: 26th January 2017
 # Version 1.0
 
+from colorama import Fore, Back, Style
+from colorama import init
 import pyrebase
 import sqlite3
 import sys
@@ -35,7 +37,7 @@ def sync_firebase(item_id, todo, item):
     data = {"todo": todo, "item": item}
     db.child("todos").child(item_id).set(data)
 
-    """ 
+    """
     DESCRIPTION: Enter TO DO Category and its items into the database.
     """
 
@@ -69,7 +71,7 @@ def data_entry():
         if add_item_prompt == 'n' or add_item_prompt == 'N':
             break
 
-    """ 
+    """
     DESCRIPTION: View the TO-DO List Categories available in the database.
     """
 
@@ -82,36 +84,36 @@ def view_todo():
         t.add_rows([[todo_category[0]]])
         print (t.draw())
 
-    """ 
-    DESCRIPTION: View the items per TO-DO List Category available 
-    in the database.
+    """
+    DESCRIPTION: View the items per TO-DO List Category
+    available in the database.
     """
 
 
 def view_item_per_todo():
-    print('Enter the TITLE of TO-DO List to delete items you have done.\n')
+    print('ENTER THE TO-DO LIST CATEGORY TITLE: \n')
     print('For example: Books To Read \n')
     key_word = input('Enter keyword: \n')
-    c.execute('SELECT * FROM toDo_4 WHERE item LIKE ?',
+    c.execute('SELECT * FROM toDo_5 WHERE item LIKE ?',
               ('%' + key_word + '%',))
     todo_word = c.fetchall()
     for item_word in todo_word:
         t.add_rows([[item_word[1]]])
         print (t.draw())
 
-    """ 
+    """
     DESCRIPTION: View all the items available in the database.
     """
 
 
 def view_items():
-    c.execute('SELECT * FROM toDo_4')
+    c.execute('SELECT * FROM toDo_5')
     rows = c.fetchall()
     for row in rows:
         t.add_rows([[[row[1]]]])
         print (t.draw())
 
-    """ 
+    """
     DESCRIPTION: User Interface
     """
 
@@ -120,7 +122,7 @@ def console():
     while True:
         print('\n')
         print('*' * 80)
-        print("Forget Me Not")
+        print("FORGET ME NOT")
         print('*' * 80)
         print()
         print('_' * 80)
@@ -128,29 +130,29 @@ def console():
         print('_' * 80)
         print('_' * 80)
         a = '-'
-        print("Enter 1")
+        print("ENTER 1")
         print("-".center(20, a))
-        print("To Add To Do Categories and Items \n")
-        print("Enter 2")
+        print("TO ADD TO-DO CATEGORIES AND ITEMS \n")
+        print("ENTER 2")
         print("-".center(20, a))
-        print("View Your To Do Collections \n")
-        print("Enter 3")
+        print("VIEW YOUR TO DO COLLECTIONS \n")
+        print("ENTER 3")
         print("-".center(20, a))
-        print("View All The Items You Want To Do \n")
-        print("Enter 4")
+        print("VIEW ALL THE ITEMS YOU WANT TO DO \n")
+        print("ENTER 4")
         print("-".center(20, a))
-        print("View The Items to be Done From each To Do Category \n")
-        print("Enter 0")
+        print("VIEW THE ITEMS TO BE DONE FROM EACH TO DO CATEGORY \n")
+        print("ENTER 0")
         print("-".center(20, a))
-        print("Quit")
+        print("QUIT")
         print('_' * 80)
         print()
-        x = input("Welcome! Please choose an option:")
+        x = input("WELCOME! PLEASE CHOOSE AN OPTION AS SPECIFIED ABOVE.")
         x = int(x)
         print('_' * 80)
         print()
         if x == 0:
-            print ('Goodbye! Do Not Forget To Come Back!')
+            print ('GOOD-BYE! DO NOT FORGET TO COME BACK!')
             # exit
             break
             pass
@@ -158,13 +160,13 @@ def console():
             data_entry()
             pass
         elif x == 2:
-            print('The TO-DO Lists available include:')
+            print('THE TO-DO LISTS AVAILABLE INCLUDE:')
             print('-' * 34)
             print()
             view_todo()
             pass
         elif x == 3:
-            print('The Items in the TO-DO Lists available include:')
+            print('THE ITEMS IN THE TO-DO LISTS ARE::')
             print('-' * 48)
             print()
             view_items()
@@ -174,7 +176,7 @@ def console():
         elif x == 5:
             delete_entry()
         else:
-            print("Invalid input")
+            print("INVALID INPUT")
 
 if __name__ == "__main__":
     console()
