@@ -5,7 +5,7 @@
 * Alows the user to add a list of topics for each To Do category.
 * Enables the user to add a list of items under each category.
 * Items in the List are stored in an online firebase storage.
-* Data inserted by the user can be synced in a realime basis.
+* Data inserted by the user can be synced in a realtime basis.
 * Easy to user interface to interact with.
 
 ### Dependencies | Requirements

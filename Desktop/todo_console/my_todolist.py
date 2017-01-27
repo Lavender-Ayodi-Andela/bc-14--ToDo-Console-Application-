@@ -20,7 +20,7 @@ c = con.cursor()
 
 def create_table():
 
-    c.execute('CREATE TABLE IF NOT EXISTS toDo_5(todo TEXT, item TEXT)')
+    c.execute('CREATE TABLE IF NOT EXISTS toDo_table(todo TEXT, item TEXT)')
 
 create_table()
 
@@ -46,7 +46,7 @@ def sync_firebase(item_id, todo, item):
 def data_entry():
     todo = input('ENTER TO DO LIST CATEGORY:\n')
     item = input('ENTER THE ITEM YOU WANT TO INCLUDE IN IT:\n')
-    c.execute('INSERT INTO toDo_5 (todo, item) VALUES (?, ?)',
+    c.execute('INSERT INTO toDo_table (todo, item) VALUES (?, ?)',
               (todo, item))
     con.commit()
 
@@ -59,7 +59,7 @@ def data_entry():
     while add_item_prompt == 'y' or add_item_prompt == 'Y':
         todo = input('ENTER TO DO LIST CATEGORY:\n')
         item = input('ENTER THE ITEM YOU WANT TO INCLUDE IN IT:\n')
-        c.execute('INSERT INTO toDo_5 (todo, item) VALUES (?, ?)',
+        c.execute('INSERT INTO toDo_table (todo, item) VALUES (?, ?)',
                   (todo, item))
         con.commit()
 
@@ -79,7 +79,7 @@ def data_entry():
 
 def view_todo():
     c.execute(
-        'SELECT todo,count (todo) FROM toDo_5 GROUP BY todo HAVING count(todo) >1')
+        'SELECT todo,count (todo) FROM toDo_table GROUP BY todo HAVING count(todo) >1')
     todo_present = c.fetchall()
     for todo_category in todo_present:
         t.add_rows([[todo_category[0]]])
@@ -95,7 +95,7 @@ def view_item_per_todo():
     print('ENTER THE TO-DO LIST CATEGORY TITLE: \n')
     print('For example: Books To Read \n')
     key_word = input('Enter keyword: \n')
-    c.execute('SELECT * FROM toDo_5 WHERE item LIKE ?',
+    c.execute('SELECT * FROM toDo_table WHERE item LIKE ?',
               ('%' + key_word + '%',))
     todo_word = c.fetchall()
     for item_word in todo_word:
@@ -108,11 +108,10 @@ def view_item_per_todo():
 
 
 def view_items():
-    c.execute('SELECT * FROM toDo_5')
+    c.execute('SELECT * FROM toDo_table')
     rows = c.fetchall()
     for row in rows:
-        t.add_rows([[[row[1]]]])
-        print (t.draw())
+        print (row[1])
 
     """
     DESCRIPTION: User Interface
