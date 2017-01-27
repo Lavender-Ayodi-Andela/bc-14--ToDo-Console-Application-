@@ -35,43 +35,57 @@ def sync_firebase(item_id, todo, item):
     data = {"todo": todo, "item": item}
     db.child("todos").child(item_id).set(data)
 
+    """ 
+    DESCRIPTION: Enter TO DO Category and its items into the database.
+    """
+
 
 def data_entry():
-    print('For example : Books To Read \n')
-    todo = input('Enter the TITLE of the TO-DO List:\n')
-    print('Insert in this format : Books To Read: Bible \n')
-    item = input('Enter the Item you want to include in the List:\n')
-
-    c.execute('INSERT INTO toDo_4 (todo, item) VALUES (?, ?)', (todo, item))
+    todo = input('ENTER TO DO LIST CATEGORY:\n')
+    item = input('ENTER THE ITEM YOU WANT TO INCLUDE IN IT:\n')
+    c.execute('INSERT INTO toDo_5 (todo, item) VALUES (?, ?)',
+              (todo, item))
     con.commit()
+
     item_id = c.lastrowid
     sync_firebase(item_id, todo, item)
-    print ('Data entered successfully')
-    add_item_prompt = input(('Do you want add another item? y/n \n ').lower())
 
-    while add_item_prompt != 'n' or add_item_prompt != 'no':
-        print('\n')
-        todo = input('Enter the TITLE of the TO-DO List:\n')
-        item = input('Enter the Item you want to include in the List:\n')
+    print ('DATA ENTERED SUCCESSFULLY\n')
+    add_item_prompt = input('DO YOU WANT TO ADD ANOTHER ITEM? y/n\n ')
 
-        c.execute('INSERT INTO toDo_4 (todo, item) VALUES (?, ?)',
+    while add_item_prompt == 'y' or add_item_prompt == 'Y':
+        todo = input('ENTER TO DO LIST CATEGORY:\n')
+        item = input('ENTER THE ITEM YOU WANT TO INCLUDE IN IT:\n')
+        c.execute('INSERT INTO toDo_5 (todo, item) VALUES (?, ?)',
                   (todo, item))
         con.commit()
+
         item_id = c.lastrowid
         sync_firebase(item_id, todo, item)
-        print ('Data entered successfully')
-        add_item_prompt = input('Do you want add another item? y/n ')
-        if add_item_prompt == 'n':
+
+        print ('DATA ENTERED SUCCESSFULLY\n')
+        add_item_prompt = input('DO YOU WANT TO ADD ANOTHER ITEM? y/n \n')
+
+        if add_item_prompt == 'n' or add_item_prompt == 'N':
             break
+
+    """ 
+    DESCRIPTION: View the TO-DO List Categories available in the database.
+    """
 
 
 def view_todo():
     c.execute(
-        'SELECT todo,count (todo) FROM toDo_4 GROUP BY todo HAVING count(todo) >1')
+        'SELECT todo,count (todo) FROM toDo_5 GROUP BY todo HAVING count(todo) >1')
     todo_present = c.fetchall()
     for todo_category in todo_present:
         t.add_rows([[todo_category[0]]])
         print (t.draw())
+
+    """ 
+    DESCRIPTION: View the items per TO-DO List Category available 
+    in the database.
+    """
 
 
 def view_item_per_todo():
@@ -85,6 +99,10 @@ def view_item_per_todo():
         t.add_rows([[item_word[1]]])
         print (t.draw())
 
+    """ 
+    DESCRIPTION: View all the items available in the database.
+    """
+
 
 def view_items():
     c.execute('SELECT * FROM toDo_4')
@@ -93,27 +111,9 @@ def view_items():
         t.add_rows([[[row[1]]]])
         print (t.draw())
 
-
-def delete_entry():
-    print('Enter the TITLE of TO-DO List to delete items you have done.')
-    print()
-    print('For example: Books To Read')
-    print()
-    key_word = input('Enter keyword: ')
-    print()
-    c.execute('SELECT * FROM toDo_4 WHERE item LIKE ?',
-              ('%' + key_word + '%',))
-    word = c.fetchall()
-    for s in word:
-        t.add_rows([[s[1]]])
-        print (t.draw())
-
-    print ('Enter The Item That you have already done:')
-    delete_word = input('Enter the Name of the Item: ')
-    print()
-    mydata = c.execute("DELETE FROM toDo_4 WHERE Item = ?",
-                       (delete_word,))
-    print ('DELETED SUCCESSFULLY')
+    """ 
+    DESCRIPTION: User Interface
+    """
 
 
 def console():
@@ -171,6 +171,8 @@ def console():
             pass
         elif x == 4:
             view_item_per_todo()
+        elif x == 5:
+            delete_entry()
         else:
             print("Invalid input")
 
@@ -190,13 +192,3 @@ if __name__ == "__main__":
     #que = input ('Do you want add another item? y/n ')
     # else:
     #print ('EXISTS')
-
-    # check at unique
-    # for s in word:
-    # if s in word:
-    #t.add_rows ([[s [1]]])
-    #print (t.draw())
-    # else:
-    #msg_ = 'Entry Does Not Exist'
-    #t.add_rows ([[msg_]])
-    #print (t.draw())
