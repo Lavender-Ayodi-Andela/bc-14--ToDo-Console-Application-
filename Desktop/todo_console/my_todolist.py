@@ -9,6 +9,7 @@ import pyrebase
 import sqlite3
 import sys
 from texttable import Texttable
+init()
 
 
 t = Texttable()
@@ -122,37 +123,47 @@ def console():
     while True:
         print('\n')
         print('*' * 80)
-        print("FORGET ME NOT")
+        Message_1 = Fore.YELLOW + 'FORGET ME NOT'
+        print('{:^80}'.format(Message_1))
+        print(Style.RESET_ALL)
         print('*' * 80)
         print()
         print('_' * 80)
-        print("Your Favourite To-Do List App")
+        Message_2 = Fore.YELLOW + 'Your Favourite To-Do List App'
+        print('{:^80}'.format(Message_2))
+        print(Style.RESET_ALL)
         print('_' * 80)
         print('_' * 80)
         a = '-'
-        print("ENTER 1")
-        print("-".center(20, a))
-        print("TO ADD TO-DO CATEGORIES AND ITEMS \n")
-        print("ENTER 2")
-        print("-".center(20, a))
-        print("VIEW YOUR TO DO COLLECTIONS \n")
-        print("ENTER 3")
-        print("-".center(20, a))
-        print("VIEW ALL THE ITEMS YOU WANT TO DO \n")
-        print("ENTER 4")
-        print("-".center(20, a))
-        print("VIEW THE ITEMS TO BE DONE FROM EACH TO DO CATEGORY \n")
-        print("ENTER 0")
-        print("-".center(20, a))
-        print("QUIT")
+        Message_3 = Fore. CYAN + "ENTER 1 \n"
+        print('{:^80}'.format(Message_3))
+        Message_8 = "TO ADD TO-DO CATEGORIES AND ITEMS \n"
+        print('{:^80}'.format(Message_8))
+        Message_4 = "ENTER 2\n"
+        print('{:^80}'.format(Message_4))
+        Message_9 = "VIEW YOUR TO DO COLLECTIONS \n"
+        print('{:^80}'.format(Message_9))
+        Message_5 = "ENTER 3\n"
+        print('{:^80}'.format(Message_5))
+        Message_10 = "VIEW ALL THE ITEMS YOU WANT TO DO \n"
+        print('{:^80}'.format(Message_10))
+        Message_6 = "ENTER 4\n"
+        print('{:^80}'.format(Message_6))
+        Message_11 = "VIEW THE ITEMS TO BE DONE FROM EACH TO DO CATEGORY \n"
+        print('{:^80}'.format(Message_11))
+        Message_7 = "ENTER 0\n"
+        print('{:^80}'.format(Message_7))
+        Message_12 = "QUIT\n"
+        print('{:^80}'.format(Message_12))
         print('_' * 80)
-        print()
-        x = input("WELCOME! PLEASE CHOOSE AN OPTION AS SPECIFIED ABOVE.")
+        print(Style.RESET_ALL)
+        x = input("WELCOME! PLEASE CHOOSE AN OPTION AS SPECIFIED ABOVE: ")
         x = int(x)
+        print(Style.RESET_ALL)
         print('_' * 80)
         print()
         if x == 0:
-            print ('GOOD-BYE! DO NOT FORGET TO COME BACK!')
+            print (Fore.YELLOW + 'GOOD-BYE! DO NOT FORGET TO COME BACK!')
             # exit
             break
             pass
@@ -160,37 +171,24 @@ def console():
             data_entry()
             pass
         elif x == 2:
-            print('THE TO-DO LISTS AVAILABLE INCLUDE:')
+            print(Fore.YELLOW + 'THE TO-DO LISTS AVAILABLE INCLUDE:')
+            print(Style.RESET_ALL)
             print('-' * 34)
             print()
             view_todo()
             pass
         elif x == 3:
-            print('THE ITEMS IN THE TO-DO LISTS ARE::')
+            print(Fore.YELLOW + 'THE ITEMS IN THE TO-DO LISTS ARE:')
+            print(Style.RESET_ALL)
             print('-' * 48)
             print()
             view_items()
             pass
         elif x == 4:
             view_item_per_todo()
-        elif x == 5:
-            delete_entry()
         else:
-            print("INVALID INPUT")
+            print(Fore.RED + "INVALID INPUT")
+            print(Style.RESET_ALL)
 
 if __name__ == "__main__":
     console()
-
-    # check if record already exists
-    #c.execute("SELECT * FROM toDo_4 WHERE item = ?", (item,))
-    #dat = c.fetchall()
-    # for d in dat:
-    # if not d:
-    #c.execute ('INSERT INTO toDo_4 (todo, item) VALUES (?, ?)', (todo, item))
-    # con.commit()
-    #item_id = c.lastrowid
-    #sync_firebase(item_id, todo, item)
-    #print ('Data entered successfully')
-    #que = input ('Do you want add another item? y/n ')
-    # else:
-    #print ('EXISTS')
