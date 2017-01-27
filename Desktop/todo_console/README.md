@@ -11,47 +11,33 @@
 ### Dependencies | Requirements
 * [Python 3.6.0] (https://www.python.org/downloads/release/python-360/) : Python Interpreter
 
-* [requests 2.10.0] (http://docs.python-requests.org/en/master/) : Enables connection between Quizzler and Firebase
-           ```pip install requests==1.1.0```
+* [Pyrebase 3.0.27] (https://github.com/thisbejim/Pyrebase) : A simple python wrapper for the Firebase API.
+           ```pip install pyrebase```
 
-* [tqdm 4.5.0] (https://pypi.python.org/pypi/tqdm) : Enables implementation of progress bars
-           ```pip install tqdm```
+* [colorama 0.3.7 ]  (https://pypi.python.org/pypi/colorama) : Enables the user to add font and color in python applications. ```pip install colorama```
 
-* [python-firebase 1.2] (https://pypi.python.org/pypi/python-firebase/1.2) : Enables easy connection between Firebase and Python
-           ```pip install python-firebase```
 
-* [Colorama==0.3.7 ]  (https://pypi.python.org/pypi/colorama) : Colour and font enhancing for python applications. ```pip install colorama```
-
-* [pyfiglet==0.7.5] (https://pypi.python.org/pypi/pyfiglet): Takes ASCII text and renders it in ASCII art fonts.
-```pip install https://pypi.python.org/packages/source/p/pyfiglet/pyfiglet-0.7.5.tar.gz```
-
-* [termcolor==1.1.0] (https://pypi.python.org/pypi/termcolor): ANSII Color formatting for output in terminal. 
-```pip install termcolor```
+* [texttable 0.8.7] (https://pypi.python.org/pypi/texttable/0.8.7): A module to generate a formatted text table, using ASCII characters. 
+```pip install texttable```
 
        
-#### To install all requirements, download the [requirements.txt] (https://github.com/emabishi/bc-7-Quiz-Application/blob/master/requirements.txt) file then type this in your terminal application:
+#### To install all requirements, download the [requirements.txt] (https://github.com/Lavender-Ayodi-Andela/bc-14--ToDo-Console-Application-/blob/master/Desktop/todo_console/requirements.txt) file then type this in your terminal application:
              pip install -r /path/to/requirements.txt
 
-* To get you started, after installation, use the commands, listonline and download quiz <quiz name> or copy the quizzes in [this] (https://github.com/emabishi/bc-7-Quiz-Application/tree/master/QuizApp/quizzes) project's github repository and use the importquiz <quiz source path> command to import them into the Quizzler library. 
 
 
 ### Commands
 
 |Command| Description|
 |-----|---------------------------------------------------------|
-|help | Displays all available commands and their descriptions |
-| help (command) | Describes the command |
-| listquizzes | Displays available local quizzes |
-| takequiz (quiz name) | Launches the local quiz quiz name |
-| listonline | Display available online quizzes |
-| download (quiz) | Add a quiz to the local collection from online source |
-| upload (quiz source path | Add quiz to online collection |
-| importquiz (quiz source path) | Add quiz to local collection from external source |
+|Enter 1 | To add To-Do categories and items. |
+| Enter 2 | Displays the User's To-Do Categories. |
+| Enter 3 | Displays all the items saved by the user within the database. |
+| Enter 4 | Displays the items as specified by the user, for example, as per each To-Do list. |
+| Enter 0 | Exit the console |
 
-### Copyright and Licensing
-MIT license. For detailed licence information, see [license] (https://github.com/emabishi/bc-7-Quiz-Application/blob/master/LICENSE)
 
 ### Contact Information
-Find the author at [@emabishi] (https://github.com/emabishi) on github.
+Find the author at [@Lavender-Ayodi-Andela] (https://github.com/Lavender-Ayodi-Andela) on github.
 
 
